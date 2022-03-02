@@ -1,5 +1,11 @@
-import reprlib
-from reprlib import repr
+from datetime import datetime
+
+
+class Log:
+    # MIXIN: class that can be inherited but should not be instanced. It only has some behaviours to be used for
+    # another classes
+    def __str__(self):
+        return f"Lista criada em {datetime.now().strftime('%d/%m/%Y às %H:%M:%S')}"
 
 
 class Programa:
@@ -59,7 +65,7 @@ class Serie(Programa):
         return self._temporadas
 
 
-class Playlitst:
+class Playlitst(Log):
     def __init__(self, nome, programas):
         self.nome = nome
         self._programas = programas
@@ -101,7 +107,8 @@ lista = [serie2, serie3, serie1]
 minha_playlist = Playlitst("Ver já!", lista)
 
 # After implement __len__ in class Playlist we gain the ability to use LEN() in our object
-print(f"Sua lista possui {len(minha_playlist)} programa(os).")
+print(f"Sua lista possui {len(minha_playlist)} programa(s).")
+print(minha_playlist)
 
 # After implement __getitem__ in class Playlist we gain all the particularity of a list, BUT without using heritage.
 # This is called DUCK TYPING. That means that I don´t want my class to become a list (trough heritage), I want it just
